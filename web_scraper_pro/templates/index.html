@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>AI Job Intelligence Dashboard</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Inter', sans-serif;
+        }
+
+        body {
+            background: radial-gradient(circle at top, #0f2027, #203a43, #2c5364);
+            color: #fff;
+            padding: 30px;
+        }
+
+        /* HEADER */
+        .header {
+            text-align: center;
+            margin-bottom: 35px;
+        }
+
+        .header h1 {
+            font-size: 2.6rem;
+            font-weight: 700;
+            background: linear-gradient(90deg, #00f2fe, #4facfe);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .header p {
+            color: #cfd8dc;
+            margin-top: 8px;
+            font-size: 0.95rem;
+        }
+
+        /* FILTER CARD */
+        .filter-card {
+            background: rgba(255, 255, 255, 0.08);
+            backdrop-filter: blur(12px);
+            border-radius: 16px;
+            padding: 20px;
+            max-width: 900px;
+            margin: 0 auto 30px;
+            box-shadow: 0 8px 30px rgba(0,0,0,0.3);
+        }
+
+        .filter-card form {
+            display: flex;
+            gap: 12px;
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .filter-card input {
+            padding: 12px 14px;
+            border-radius: 10px;
+            border: none;
+            outline: none;
+            min-width: 180px;
+            background: rgba(255,255,255,0.15);
+            color: #fff;
+        }
+
+        .filter-card input::placeholder {
+            color: #ddd;
+        }
+
+        .filter-card button {
+            padding: 12px 18px;
+            border-radius: 10px;
+            border: none;
+            cursor: pointer;
+            font-weight: 600;
+            background: linear-gradient(135deg, #00f2fe, #4facfe);
+            color: #000;
+            transition: 0.3s ease;
+        }
+
+        .filter-card button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 20px rgba(79,172,254,0.6);
+        }
+
+        /* TABLE CARD */
+        .table-card {
+            background: rgba(255, 255, 255, 0.07);
+            backdrop-filter: blur(14px);
+            border-radius: 18px;
+            padding: 20px;
+            box-shadow: 0 10px 35px rgba(0,0,0,0.35);
+            overflow-x: auto;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            min-width: 900px;
+        }
+
+        thead th {
+            text-align: left;
+            font-size: 0.85rem;
+            letter-spacing: 0.05em;
+            color: #a7c7e7;
+            padding: 14px;
+            border-bottom: 1px solid rgba(255,255,255,0.2);
+        }
+
+        tbody td {
+            padding: 14px;
+            font-size: 0.9rem;
+            border-bottom: 1px solid rgba(255,255,255,0.08);
+        }
+
+        tbody tr {
+            transition: 0.25s ease;
+        }
+
+        tbody tr:hover {
+            background: rgba(79,172,254,0.12);
+            transform: scale(1.005);
+        }
+
+        .badge {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            background: rgba(0,242,254,0.25);
+            color: #00f2fe;
+            display: inline-block;
+        }
+
+        .empty {
+            text-align: center;
+            padding: 40px;
+            color: #ccc;
+            font-style: italic;
+        }
+
+        /* FOOTER */
+        .footer {
+            text-align: center;
+            margin-top: 30px;
+            font-size: 0.8rem;
+            color: #b0bec5;
+        }
+
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="header">
+    <h1>🤖 AI Job Intelligence Dashboard</h1>
+    <p>Scraped • Classified • Enriched by Generative AI</p>
+</div>
+
+
+<div class="table-card">
+    <table>
+        <thead>
+            <tr>
+                <th>ID</th>
+                <th>Title</th>
+                <th>Company</th>
+                <th>Location</th>
+                <th>Link</th>
+                <th>Description</th>
+            </tr>
+        </thead>
+
+        <tbody>
+        {% if products %}
+            {% for fake_jobs in products %}
+            <tr>
+                <td>{{ fake_jobs.id }}</td>
+                <td><strong>{{ fake_jobs.title }}</strong></td>
+                <td>{{ fake_jobs.company }}</td>
+                <td>{{ fake_jobs.location }}</td>
+                <td>{{ fake_jobs.link }}</td>
+                <td><span class="badge">{{ fake_jobs.description }}</span></td>
+            </tr>
+            {% endfor %}
+        {% else %}
+            <tr>
+                <td colspan="6" class="empty">🚫 No jobs found for selected filters</td>
+            </tr>
+        {% endif %}
+        </tbody>
+    </table>
+</div>
+
+<div class="footer">
+    ⚡ Powered by Python • Flask • MySQL • Generative AI
+</div>
+
+</body>
+</html>
